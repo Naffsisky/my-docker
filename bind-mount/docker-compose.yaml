@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  mongodb-example1:
+    container_name: mongodb-example1
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=prinaf
+      - MONGO_INITDB_ROOT_PASSWORD=prinaf
+      - MONGO_INITDB_DATABASE=testing-db-docker
+    volumes:
+      - "./data-mongo1:/data/db"
+
+  mongodb-example2:
+    container_name: mongodb-example2
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=prinaf
+      - MONGO_INITDB_ROOT_PASSWORD=prinaf
+      - MONGO_INITDB_DATABASE=testing-db-docker
+    volumes:
+      - type: bind
+        source: "./data-mongo2"
+        target: "/data/db"
+        read_only: false

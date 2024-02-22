@@ -1,0 +1,22 @@
+firstName: "Prinaf"
+lastName: "Sika"
+age: 20
+hobiesArray:
+  - Coding
+  - Reading
+  - Sleep
+addressNestedArray:
+  street: "Street 1"
+  city: "City 1"
+  country: "Country 1"
+  zip: "Zip 1"
+  addressArray:
+    - street: "Street 2"
+      city: "City 2"
+      country: "Country 2"
+      zip: "Zip 2"
+    - street: "Street 3"
+      city: "City 3"
+      country: "Country 3"
+      zip: "Zip 3"
+  
