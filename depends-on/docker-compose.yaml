@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  # mongodb
+  mongodb-example:
+    image: mongo:latest
+    container_name: mongodb-example
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: prinaf
+      MONGO_INITDB_ROOT_PASSWORD: prinaf
+      MONGO_INITDB_DATABASE: admin
+    networks:
+      - network-example
+
+  # mongodb-express
+  mongodb-express-example:
+    image: mongo-express:latest
+    container_name: mongodb_express_example
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: prinaf
+      ME_CONFIG_BASICAUTH_PASSWORD: prinaf
+      ME_CONFIG_MONGODB_ADMINUSERNAME: prinaf
+      ME_CONFIG_MONGODB_ADMINPASSWORD: prinaf
+      ME_CONFIG_MONGODB_SERVER: mongodb-example
+    networks:
+      - network-example
+    depends_on:
+      - mongodb-example
+    command: sh -c "sleep 30 && node app"
+    healthcheck:
+      test: "exit 0"
+      interval: 10s
+      retries: 5
+
+networks:
+  network-example:
+    name: network-example
+    driver: bridge
